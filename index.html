@@ -3,8 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GabSocial Media — Estratégia de conteúdo</title>
+<title>GabSocial Media — Portal do Cliente</title>
 <script src="https://cdn.tailwindcss.com"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-storage-compat.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   body { font-family: 'Inter', sans-serif; }
@@ -16,7 +19,7 @@
 <!-- NAVBAR -->
 <header class="sticky top-0 z-40 bg-[#FAF8F3]/90 backdrop-blur border-b border-[#e4ded2]">
   <div class="max-w-6xl mx-auto px-5 md:px-8 h-16 flex items-center justify-between">
-    <span class="serif text-lg tracking-tight" onclick="voltarHome()" style="cursor: pointer;">GabSocial<span class="text-[#6E2A3B]">.</span></span>
+    <span class="serif text-lg tracking-tight cursor-pointer" onclick="voltarHome()">GabSocial<span class="text-[#6E2A3B]">.</span></span>
     <nav class="hidden md:flex items-center gap-7 text-sm text-[#4a453d]">
       <a href="#inicio" class="hover:text-[#6E2A3B]">Início</a>
       <a href="#como" class="hover:text-[#6E2A3B]">Como funciona</a>
@@ -35,7 +38,7 @@
     <div>
       <p class="uppercase tracking-[0.2em] text-[11px] text-[#B99257] font-semibold mb-4">GabSocial Media</p>
       <h1 class="serif text-4xl md:text-6xl leading-[1.05] mb-6">Estratégia antes de estética.</h1>
-      <p class="text-[#4a453d] text-base md:text-lg max-w-lg mb-8">Planejamento, produção de conteúdo e gestão de redes sociais para negócios que querem crescer com direção — não só com posts bonitos.</p>
+      <p class="text-[#4a453d] text-base md:text-lg max-w-lg mb-8">Planejamento, produção de conteúdo e gestão de redes sociais para negócios que querem crescer com direção.</p>
       <div class="flex flex-wrap gap-3">
         <button onclick="mostrarLogin()" class="px-6 py-2 bg-[#6E2A3B] text-white rounded-md hover:bg-[#5a2130]">Entrar →</button>
         <button onclick="scrollTo('contato')" class="px-6 py-2 border border-[#1c1b1f]/20 rounded-md hover:bg-black/5">Solicitar proposta</button>
@@ -47,28 +50,7 @@
         <div>
           <div class="flex justify-between text-sm mb-1.5">
             <span class="text-[#c9c4b8]">Clientes ativos</span>
-            <span class="serif">4</span>
-          </div>
-          <div class="h-[3px] bg-white/10 rounded-full overflow-hidden">
-            <div class="h-full bg-[#B99257] w-4/5"></div>
-          </div>
-        </div>
-        <div>
-          <div class="flex justify-between text-sm mb-1.5">
-            <span class="text-[#c9c4b8]">Créditos em circulação</span>
-            <span class="serif">120</span>
-          </div>
-          <div class="h-[3px] bg-white/10 rounded-full overflow-hidden">
-            <div class="h-full bg-[#B99257] w-3/4"></div>
-          </div>
-        </div>
-        <div>
-          <div class="flex justify-between text-sm mb-1.5">
-            <span class="text-[#c9c4b8]">Calendários em produção</span>
-            <span class="serif">4</span>
-          </div>
-          <div class="h-[3px] bg-white/10 rounded-full overflow-hidden">
-            <div class="h-full bg-[#B99257] w-full"></div>
+            <span class="serif" id="totalClientes">4</span>
           </div>
         </div>
       </div>
@@ -84,17 +66,17 @@
       <div>
         <div class="w-9 h-9 rounded-full bg-[#6E2A3B]/10 flex items-center justify-center mb-4 text-lg">✦</div>
         <h3 class="serif text-lg mb-2">Estratégia primeiro</h3>
-        <p class="text-sm text-[#4a453d] leading-relaxed">Nenhuma arte sai do papel sem entender o negócio, público e objetivo por trás dela.</p>
+        <p class="text-sm text-[#4a453d]">Nenhuma arte sai do papel sem entender o negócio, público e objetivo.</p>
       </div>
       <div>
         <div class="w-9 h-9 rounded-full bg-[#6E2A3B]/10 flex items-center justify-center mb-4 text-lg">💼</div>
         <h3 class="serif text-lg mb-2">Parceria de verdade</h3>
-        <p class="text-sm text-[#4a453d] leading-relaxed">Atuo como parte do time do cliente — da análise ao resultado, com transparência.</p>
+        <p class="text-sm text-[#4a453d]">Atuo como parte do time — da análise ao resultado, com transparência.</p>
       </div>
       <div>
         <div class="w-9 h-9 rounded-full bg-[#6E2A3B]/10 flex items-center justify-center mb-4 text-lg">✓</div>
         <h3 class="serif text-lg mb-2">Design com propósito</h3>
-        <p class="text-sm text-[#4a453d] leading-relaxed">Estética limpa a serviço de gatilhos psicológicos e storytelling.</p>
+        <p class="text-sm text-[#4a453d]">Estética limpa a serviço de gatilhos psicológicos e storytelling.</p>
       </div>
     </div>
   </div>
@@ -103,80 +85,23 @@
 <!-- PACOTES -->
 <section id="pacotes" class="max-w-6xl mx-auto px-5 md:px-8 py-20">
   <h2 class="serif text-3xl mb-2">Pacotes mensais</h2>
-  <p class="text-[#4a453d] mb-12 max-w-xl">Sistema de créditos: 1 arte = 1 crédito · carrossel = 1 por página · vídeo editado = 3 créditos.</p>
+  <p class="text-[#4a453d] mb-12 max-w-xl">Sistema de créditos: 1 arte = 1 · carrossel = 1 · vídeo = 3.</p>
   <div class="grid md:grid-cols-3 gap-6">
     <div class="rounded-xl p-6 border border-[#e4ded2] bg-white">
       <h3 class="serif text-xl mb-1">START</h3>
       <p class="text-3xl serif mb-1 text-[#1c1b1f]">R$180<span class="text-sm">/mês</span></p>
       <p class="text-xs text-[#8a8378] mb-5">12 créditos</p>
-      <button onclick="mostrarLogin()" class="w-full px-4 py-2 text-sm border border-[#1c1b1f]/20 rounded-md hover:bg-black/5">Escolher</button>
     </div>
     <div class="rounded-xl p-6 border-2 border-[#6E2A3B] bg-[#6E2A3B] text-white">
       <p class="text-[11px] uppercase tracking-wide text-[#B99257] mb-2 font-semibold">Mais procurado</p>
       <h3 class="serif text-xl mb-1">CRESCIMENTO</h3>
       <p class="text-3xl serif mb-1 text-[#B99257]">R$240<span class="text-sm">/mês</span></p>
       <p class="text-xs text-white/70 mb-5">25 créditos</p>
-      <button onclick="mostrarLogin()" class="w-full px-4 py-2 text-sm bg-[#B99257] text-[#1c1b1f] rounded-md hover:bg-[#a5814b] font-medium">Escolher</button>
     </div>
     <div class="rounded-xl p-6 border border-[#e4ded2] bg-white">
       <h3 class="serif text-xl mb-1">AUTORIDADE</h3>
       <p class="text-3xl serif mb-1 text-[#1c1b1f]">R$320<span class="text-sm">/mês</span></p>
       <p class="text-xs text-[#8a8378] mb-5">50 créditos</p>
-      <button onclick="mostrarLogin()" class="w-full px-4 py-2 text-sm border border-[#1c1b1f]/20 rounded-md hover:bg-black/5">Escolher</button>
-    </div>
-  </div>
-  <p class="text-xs text-[#8a8378] mt-6">Administração de perfil: + R$50 em qualquer pacote.</p>
-</section>
-
-<!-- PORTFÓLIO -->
-<section id="portfolio" class="bg-white border-y border-[#e4ded2] py-20">
-  <div class="max-w-6xl mx-auto px-5 md:px-8">
-    <h2 class="serif text-3xl mb-10">Portfólio</h2>
-    <div class="grid md:grid-cols-3 gap-6">
-      <div class="border border-[#e4ded2] rounded-xl p-6">
-        <div class="text-2xl mb-4">🏆</div>
-        <h3 class="serif text-lg mb-2">IARTO Auto Center</h3>
-        <p class="text-sm text-[#4a453d] leading-relaxed">Calendário de reels 100% focado em pneus e rodas, com autoridade técnica e linguagem acessível.</p>
-      </div>
-      <div class="border border-[#e4ded2] rounded-xl p-6">
-        <div class="text-2xl mb-4">💄</div>
-        <h3 class="serif text-lg mb-2">Graziela Salles</h3>
-        <p class="text-sm text-[#4a453d] leading-relaxed">Perfil duplo beleza + mentoria, calendário sazonal ajustado a Beauty Week e datas especiais.</p>
-      </div>
-      <div class="border border-[#e4ded2] rounded-xl p-6">
-        <div class="text-2xl mb-4">❄️</div>
-        <h3 class="serif text-lg mb-2">Eletro-refrigeração Guerra</h3>
-        <p class="text-sm text-[#4a453d] leading-relaxed">Planejamento editorial ajustado ao crédito disponível, sem perder consistência de marca.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CLIENTES -->
-<section id="clientes" class="bg-[#1c1b1f] text-[#FAF8F3] py-20">
-  <div class="max-w-6xl mx-auto px-5 md:px-8">
-    <h2 class="serif text-3xl mb-10">Clientes</h2>
-    <div class="grid sm:grid-cols-2 md:grid-cols-4 gap-5">
-      <div class="border border-white/10 rounded-xl p-5">
-        <div class="text-lg mb-3">🏅</div>
-        <p class="font-semibold text-sm mb-1">IARTO Auto Center</p>
-        <p class="text-xs text-[#c9c4b8]">Pneus e rodas</p>
-      </div>
-      <div class="border border-white/10 rounded-xl p-5">
-        <div class="text-lg mb-3">🏅</div>
-        <p class="font-semibold text-sm mb-1">Eletro-refrigeração Guerra</p>
-        <p class="text-xs text-[#c9c4b8]">Refrigeração</p>
-      </div>
-      <div class="border border-white/10 rounded-xl p-5">
-        <div class="text-lg mb-3">🏅</div>
-        <p class="font-semibold text-sm mb-1">Graziela Salles</p>
-        <p class="text-xs text-[#c9c4b8]">Beleza</p>
-      </div>
-      <div class="border border-white/10 rounded-xl p-5">
-        <div class="text-lg mb-3">🏅</div>
-        <p class="font-semibold text-sm mb-1">Esponjão</p>
-        <p class="text-xs text-[#c9c4b8]">Limpeza</p>
-      </div>
     </div>
   </div>
 </section>
@@ -185,20 +110,17 @@
 <section id="contato" class="max-w-6xl mx-auto px-5 md:px-8 py-20">
   <div class="bg-white rounded-2xl border border-[#e4ded2] p-8 md:p-12">
     <h2 class="serif text-3xl mb-2">Vamos conversar?</h2>
-    <p class="text-[#4a453d] mb-8 max-w-lg">Fale comigo sobre seu projeto. Quero entender seu negócio, seus desafios e seus objetivos.</p>
+    <p class="text-[#4a453d] mb-8 max-w-lg">Fale comigo sobre seu projeto.</p>
     
     <form onsubmit="enviarWhatsApp(event)" class="max-w-md">
       <div class="mb-4">
-        <label class="block text-[11px] uppercase tracking-wide text-[#8a8378] mb-1 font-medium">Nome</label>
-        <input id="contatoNome" type="text" placeholder="Seu nome" required class="w-full bg-[#FAF8F3] border border-[#e4ded2] rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#6E2A3B]/30">
+        <input id="contatoNome" type="text" placeholder="Seu nome" required class="w-full bg-[#FAF8F3] border border-[#e4ded2] rounded-md px-3 py-2 text-sm">
       </div>
       <div class="mb-4">
-        <label class="block text-[11px] uppercase tracking-wide text-[#8a8378] mb-1 font-medium">Empresa</label>
-        <input id="contatoEmpresa" type="text" placeholder="Nome da empresa" required class="w-full bg-[#FAF8F3] border border-[#e4ded2] rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#6E2A3B]/30">
+        <input id="contatoEmpresa" type="text" placeholder="Sua empresa" required class="w-full bg-[#FAF8F3] border border-[#e4ded2] rounded-md px-3 py-2 text-sm">
       </div>
       <div class="mb-4">
-        <label class="block text-[11px] uppercase tracking-wide text-[#8a8378] mb-1 font-medium">Mensagem</label>
-        <textarea id="contatoMsg" placeholder="Conte sobre seu projeto..." required rows="4" class="w-full bg-[#FAF8F3] border border-[#e4ded2] rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#6E2A3B]/30"></textarea>
+        <textarea id="contatoMsg" placeholder="Sua mensagem..." required rows="4" class="w-full bg-[#FAF8F3] border border-[#e4ded2] rounded-md px-3 py-2 text-sm"></textarea>
       </div>
       <button type="submit" class="w-full bg-[#6E2A3B] text-white py-2 rounded-md hover:bg-[#5a2130] font-medium">Enviar via WhatsApp →</button>
     </form>
@@ -206,44 +128,119 @@
 </section>
 
 <!-- FOOTER -->
-<footer class="max-w-6xl mx-auto px-5 md:px-8 py-16 border-t border-[#e4ded2] flex flex-col md:flex-row justify-between gap-6">
-  <div>
-    <span class="serif text-lg">GabSocial<span class="text-[#6E2A3B]">.</span></span>
-    <p class="text-sm text-[#4a453d] mt-2 max-w-sm">Estratégia, conteúdo e gestão — do planejamento ao resultado.</p>
-  </div>
-  <div class="flex items-center gap-4">
-    <span class="text-2xl">📷</span>
-    <button onclick="mostrarLogin()" class="px-4 py-2 text-sm border border-[#1c1b1f]/20 rounded-md hover:bg-black/5">Acesso</button>
-  </div>
+<footer class="max-w-6xl mx-auto px-5 md:px-8 py-16 border-t border-[#e4ded2]">
+  <span class="serif text-lg">GabSocial<span class="text-[#6E2A3B]">.</span></span>
+  <p class="text-sm text-[#4a453d] mt-2 max-w-sm">Estratégia, conteúdo e gestão — do planejamento ao resultado.</p>
 </footer>
 </div>
 
-<!-- DASHBOARD SCREEN (Hidden by default) -->
-<div id="dashboardScreen" class="hidden min-h-screen bg-[#FAF8F3]">
+<!-- ADMIN DASHBOARD -->
+<div id="adminScreen" class="hidden min-h-screen bg-[#FAF8F3]">
+  <header class="bg-[#1c1b1f] text-[#FAF8F3] py-4 border-b border-[#e4ded2]">
+    <div class="max-w-6xl mx-auto px-5 md:px-8 flex items-center justify-between">
+      <span class="serif text-lg">GabSocial<span class="text-[#B99257]">.</span> Admin</span>
+      <button onclick="fazerLogout()" class="px-4 py-2 text-sm border border-white/20 rounded-md hover:bg-white/10">Sair</button>
+    </div>
+  </header>
+
+  <div class="max-w-6xl mx-auto px-5 md:px-8 py-8">
+    <div class="flex gap-3 mb-8 border-b border-[#e4ded2]">
+      <button onclick="mudarTelaAdmin('clientes')" id="abaPrincipal" class="pb-3 px-3 text-sm font-medium border-b-2 border-[#6E2A3B] text-[#6E2A3B]">Clientes</button>
+      <button onclick="mudarTelaAdmin('novo')" id="abaNovo" class="pb-3 px-3 text-sm font-medium border-b-2 border-transparent text-[#4a453d] hover:text-[#1c1b1f]">Novo Cliente</button>
+      <button onclick="mudarTelaAdmin('analise')" id="abaAnalise" class="pb-3 px-3 text-sm font-medium border-b-2 border-transparent text-[#4a453d] hover:text-[#1c1b1f]">Análise</button>
+    </div>
+
+    <!-- ABA CLIENTES -->
+    <div id="telaClientes" class="space-y-4">
+      <div class="flex justify-between items-center mb-4">
+        <h2 class="serif text-2xl">Gerenciar Clientes</h2>
+      </div>
+      <div id="listaClientes" class="space-y-3"></div>
+    </div>
+
+    <!-- ABA NOVO CLIENTE -->
+    <div id="telaNovo" class="hidden bg-white rounded-xl border border-[#e4ded2] p-6 max-w-2xl">
+      <h2 class="serif text-2xl mb-6">Adicionar Novo Cliente</h2>
+      <form onsubmit="adicionarCliente(event)" class="space-y-4">
+        <div>
+          <label class="block text-[11px] uppercase tracking-wide text-[#8a8378] mb-1 font-medium">Nome</label>
+          <input id="novoNome" type="text" required class="w-full bg-[#FAF8F3] border border-[#e4ded2] rounded-md px-3 py-2 text-sm">
+        </div>
+        <div>
+          <label class="block text-[11px] uppercase tracking-wide text-[#8a8378] mb-1 font-medium">Nicho</label>
+          <input id="novoNiche" type="text" required class="w-full bg-[#FAF8F3] border border-[#e4ded2] rounded-md px-3 py-2 text-sm">
+        </div>
+        <div>
+          <label class="block text-[11px] uppercase tracking-wide text-[#8a8378] mb-1 font-medium">Créditos mensais</label>
+          <input id="novoCreditos" type="number" required class="w-full bg-[#FAF8F3] border border-[#e4ded2] rounded-md px-3 py-2 text-sm">
+        </div>
+        <div>
+          <label class="block text-[11px] uppercase tracking-wide text-[#8a8378] mb-1 font-medium">Valor mensal</label>
+          <input id="novoValor" type="number" required class="w-full bg-[#FAF8F3] border border-[#e4ded2] rounded-md px-3 py-2 text-sm">
+        </div>
+        <div>
+          <label class="block text-[11px] uppercase tracking-wide text-[#8a8378] mb-1 font-medium">Google Drive Link</label>
+          <input id="novoGDrive" type="url" class="w-full bg-[#FAF8F3] border border-[#e4ded2] rounded-md px-3 py-2 text-sm">
+        </div>
+        <div>
+          <label class="block text-[11px] uppercase tracking-wide text-[#8a8378] mb-1 font-medium">Monday Link</label>
+          <input id="novoMonday" type="url" class="w-full bg-[#FAF8F3] border border-[#e4ded2] rounded-md px-3 py-2 text-sm">
+        </div>
+        <div>
+          <label class="block text-[11px] uppercase tracking-wide text-[#8a8378] mb-1 font-medium">Trello Link</label>
+          <input id="novoTrello" type="url" class="w-full bg-[#FAF8F3] border border-[#e4ded2] rounded-md px-3 py-2 text-sm">
+        </div>
+        <div>
+          <label class="block text-[11px] uppercase tracking-wide text-[#8a8378] mb-1 font-medium">Foto</label>
+          <input id="novoFoto" type="file" accept="image/*" class="w-full bg-[#FAF8F3] border border-[#e4ded2] rounded-md px-3 py-2 text-sm">
+        </div>
+        <button type="submit" class="w-full bg-[#6E2A3B] text-white py-2 rounded-md hover:bg-[#5a2130] font-medium">Criar cliente</button>
+      </form>
+    </div>
+
+    <!-- ABA ANÁLISE -->
+    <div id="telaAnalise" class="hidden grid md:grid-cols-3 gap-6">
+      <div class="bg-white rounded-xl border border-[#e4ded2] p-6">
+        <p class="text-[11px] uppercase tracking-wide text-[#8a8378] mb-2">Total de clientes</p>
+        <p class="serif text-3xl text-[#6E2A3B]" id="totalClientesAnalise">0</p>
+      </div>
+      <div class="bg-white rounded-xl border border-[#e4ded2] p-6">
+        <p class="text-[11px] uppercase tracking-wide text-[#8a8378] mb-2">Créditos em circulação</p>
+        <p class="serif text-3xl text-[#B99257]" id="totalCreditosAnalise">0</p>
+      </div>
+      <div class="bg-white rounded-xl border border-[#e4ded2] p-6">
+        <p class="text-[11px] uppercase tracking-wide text-[#8a8378] mb-2">Receita mensal</p>
+        <p class="serif text-3xl text-[#1c1b1f]" id="totalReceitaAnalise">R$ 0</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CLIENT DASHBOARD -->
+<div id="clientScreen" class="hidden min-h-screen bg-[#FAF8F3]">
   <header class="bg-[#1c1b1f] text-[#FAF8F3] py-4 border-b border-[#e4ded2]">
     <div class="max-w-6xl mx-auto px-5 md:px-8 flex items-center justify-between">
       <div>
         <span class="serif text-lg">GabSocial<span class="text-[#B99257]">.</span></span>
-        <p class="text-xs text-[#c9c4b8]" id="dashNome"></p>
+        <p class="text-xs text-[#c9c4b8]" id="clientNome"></p>
       </div>
       <button onclick="fazerLogout()" class="px-4 py-2 text-sm border border-white/20 rounded-md hover:bg-white/10">Sair</button>
     </div>
   </header>
 
   <div class="max-w-6xl mx-auto px-5 md:px-8 py-8">
-    <!-- CARDS RESUMO -->
     <div class="grid md:grid-cols-4 gap-4 mb-8">
       <div class="bg-white rounded-xl border border-[#e4ded2] p-4">
         <p class="text-[11px] uppercase tracking-wide text-[#8a8378] mb-2">Créditos usados</p>
-        <p class="serif text-2xl text-[#6E2A3B]" id="dashUsados">0</p>
+        <p class="serif text-2xl text-[#6E2A3B]" id="clientUsados">0</p>
       </div>
       <div class="bg-white rounded-xl border border-[#e4ded2] p-4">
         <p class="text-[11px] uppercase tracking-wide text-[#8a8378] mb-2">Créditos restantes</p>
-        <p class="serif text-2xl text-[#B99257]" id="dashRestantes">32</p>
+        <p class="serif text-2xl text-[#B99257]" id="clientRestantes">0</p>
       </div>
       <div class="bg-white rounded-xl border border-[#e4ded2] p-4">
-        <p class="text-[11px] uppercase tracking-wide text-[#8a8378] mb-2">Total mensal</p>
-        <p class="serif text-2xl text-[#1c1b1f]" id="dashTotal">32</p>
+        <p class="text-[11px] uppercase tracking-wide text-[#8a8378] mb-2">Total</p>
+        <p class="serif text-2xl text-[#1c1b1f]" id="clientTotal">0</p>
       </div>
       <div class="bg-white rounded-xl border border-[#e4ded2] p-4">
         <p class="text-[11px] uppercase tracking-wide text-[#8a8378] mb-2">Status</p>
@@ -251,46 +248,32 @@
       </div>
     </div>
 
-    <!-- PROGRESS BAR -->
     <div class="bg-white rounded-xl border border-[#e4ded2] p-6 mb-8">
-      <h3 class="serif text-lg mb-4">Consumo de créditos — Julho 2026</h3>
-      <div class="flex items-center gap-4">
-        <div class="flex-1">
-          <div class="h-8 bg-[#FAF8F3] rounded-full overflow-hidden border border-[#e4ded2]">
-            <div class="h-full bg-gradient-to-r from-[#6E2A3B] to-[#B99257] rounded-full" id="progressBar" style="width: 50%"></div>
-          </div>
-        </div>
-        <div class="text-sm text-[#8a8378] font-medium" id="progressText">50%</div>
-      </div>
-      <p class="text-xs text-[#8a8378] mt-3">Você pode consumir até 32 créditos. Cada post, carrossel e vídeo usa uma quantidade específica.</p>
-    </div>
-
-    <!-- TABS -->
-    <div class="flex gap-3 mb-8 border-b border-[#e4ded2]">
-      <button onclick="mudarAba('historico')" id="abaHistorico" class="pb-3 px-3 text-sm font-medium border-b-2 border-[#6E2A3B] text-[#6E2A3B]">Histórico</button>
-      <button onclick="mudarAba('drive')" id="abaDrive" class="pb-3 px-3 text-sm font-medium border-b-2 border-transparent text-[#4a453d] hover:text-[#1c1b1f]">Google Drive</button>
-      <button onclick="mudarAba('calendario')" id="abaCalendario" class="pb-3 px-3 text-sm font-medium border-b-2 border-transparent text-[#4a453d] hover:text-[#1c1b1f]">Calendário</button>
-    </div>
-
-    <!-- ABA HISTÓRICO -->
-    <div id="conteudoHistorico" class="bg-white rounded-xl border border-[#e4ded2] p-6">
       <h3 class="serif text-lg mb-4">Consumo de créditos</h3>
-      <div id="listaHistorico" class="space-y-3"></div>
+      <div class="h-8 bg-[#FAF8F3] rounded-full overflow-hidden border border-[#e4ded2]">
+        <div class="h-full bg-gradient-to-r from-[#6E2A3B] to-[#B99257] rounded-full" id="clientProgress" style="width: 50%"></div>
+      </div>
     </div>
 
-    <!-- ABA DRIVE -->
-    <div id="conteudoDrive" class="hidden bg-white rounded-xl border border-[#e4ded2] p-6">
-      <h3 class="serif text-lg mb-4">Acesso à sua pasta</h3>
-      <p class="text-sm text-[#4a453d] mb-4">Todos os seus calendários, briefings e materiais estão organizados aqui:</p>
-      <a id="linkDrive" href="#" target="_blank" class="inline-block px-6 py-3 bg-[#6E2A3B] text-white rounded-md hover:bg-[#5a2130] font-medium">
-        📁 Acessar Google Drive →
+    <div class="flex gap-3 mb-8 border-b border-[#e4ded2]">
+      <button onclick="mudarTelaClient('historico')" id="abcHistorico" class="pb-3 px-3 text-sm font-medium border-b-2 border-[#6E2A3B] text-[#6E2A3B]">Histórico</button>
+      <button onclick="mudarTelaClient('links')" id="abcLinks" class="pb-3 px-3 text-sm font-medium border-b-2 border-transparent text-[#4a453d] hover:text-[#1c1b1f]">Links</button>
+    </div>
+
+    <div id="conteudoHistorico" class="bg-white rounded-xl border border-[#e4ded2] p-6">
+      <div id="listaHistoricoClient" class="space-y-3"></div>
+    </div>
+
+    <div id="conteudoLinks" class="hidden space-y-4">
+      <a id="linkGDrive" href="#" target="_blank" class="block bg-white rounded-xl border border-[#e4ded2] p-6 hover:border-[#6E2A3B] transition">
+        <p class="text-sm font-medium">📁 Google Drive</p>
       </a>
-    </div>
-
-    <!-- ABA CALENDÁRIO -->
-    <div id="conteudoCalendario" class="hidden bg-white rounded-xl border border-[#e4ded2] p-6">
-      <h3 class="serif text-lg mb-4">Calendário Editorial — Julho 2026</h3>
-      <p class="text-sm text-[#8a8378] text-center py-8">📅 Calendário será carregado em breve.</p>
+      <a id="linkMonday" href="#" target="_blank" class="block bg-white rounded-xl border border-[#e4ded2] p-6 hover:border-[#6E2A3B] transition">
+        <p class="text-sm font-medium">📊 Monday</p>
+      </a>
+      <a id="linkTrello" href="#" target="_blank" class="block bg-white rounded-xl border border-[#e4ded2] p-6 hover:border-[#6E2A3B] transition">
+        <p class="text-sm font-medium">✓ Trello</p>
+      </a>
     </div>
   </div>
 </div>
@@ -299,16 +282,14 @@
 <div id="loginModal" class="hidden fixed inset-0 z-50 bg-[#1c1b1f]/50 flex items-center justify-center p-4">
   <div class="bg-[#FAF8F3] rounded-2xl p-8 w-full max-w-md">
     <div class="flex justify-between items-center mb-6">
-      <h2 class="serif text-2xl">Acesso do cliente</h2>
+      <h2 class="serif text-2xl">Acesso</h2>
       <button onclick="fecharLogin()" class="text-[#8a8378] hover:text-[#1c1b1f] text-2xl">×</button>
     </div>
     <div class="mb-4">
-      <label class="block text-[11px] uppercase tracking-wide text-[#8a8378] mb-1 font-medium">Usuário</label>
-      <input id="loginUser" type="text" placeholder="Ex: gabriela" class="w-full bg-white border border-[#e4ded2] rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#6E2A3B]/30">
+      <input id="loginUser" type="text" placeholder="Usuário" class="w-full bg-white border border-[#e4ded2] rounded-md px-3 py-2 text-sm">
     </div>
     <div class="mb-4">
-      <label class="block text-[11px] uppercase tracking-wide text-[#8a8378] mb-1 font-medium">Senha</label>
-      <input id="loginPass" type="password" placeholder="••••••••" class="w-full bg-white border border-[#e4ded2] rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#6E2A3B]/30">
+      <input id="loginPass" type="password" placeholder="Senha" class="w-full bg-white border border-[#e4ded2] rounded-md px-3 py-2 text-sm">
     </div>
     <div id="loginError" class="text-[#a13a3a] text-sm mb-4 hidden"></div>
     <button onclick="tentarLogin()" class="w-full bg-[#6E2A3B] text-white py-2 rounded-md hover:bg-[#5a2130] font-medium mb-3">Entrar</button>
@@ -317,75 +298,103 @@
 </div>
 
 <script>
-const USUARIOS = {
-  gabriela: { 
-    pass: 'admin123', 
-    nome: 'Gabriela (Admin)', 
-    role: 'admin',
-    isAdmin: true
-  },
-  iarto: { 
-    pass: 'iarto2026', 
-    nome: 'IARTO Auto Center',
-    role: 'client',
-    creditos: 32,
-    creditosUsados: 12,
-    driveLink: 'https://drive.google.com/drive/folders/1-exemplo-iarto',
-    historico: [
-      { data: '30/06', conteudo: '4 Reels (geometria 3D)', creditos: 4, tipo: 'vídeo' },
-      { data: '28/06', conteudo: '3 Posts estáticos', creditos: 3, tipo: 'post' },
-      { data: '25/06', conteudo: '1 Carrossel (5 páginas)', creditos: 1, tipo: 'carrossel' },
-      { data: '22/06', conteudo: '2 Stories', creditos: 2, tipo: 'story' },
-      { data: '20/06', conteudo: '2 Reels (balanceamento)', creditos: 2, tipo: 'vídeo' }
-    ]
-  },
-  guerra: { 
-    pass: 'guerra2026', 
-    nome: 'Eletro-refrigeração Guerra',
-    role: 'client',
-    creditos: 32,
-    creditosUsados: 8,
-    driveLink: 'https://drive.google.com/drive/folders/1-exemplo-guerra',
-    historico: [
-      { data: '28/06', conteudo: '2 Reels', creditos: 2, tipo: 'vídeo' },
-      { data: '25/06', conteudo: '2 Posts', creditos: 2, tipo: 'post' },
-      { data: '20/06', conteudo: '1 Carrossel', creditos: 1, tipo: 'carrossel' },
-      { data: '15/06', conteudo: '3 Stories', creditos: 3, tipo: 'story' }
-    ]
-  },
-  graziela: { 
-    pass: 'graziela2026', 
-    nome: 'Graziela Salles',
-    role: 'client',
-    creditos: 40,
-    creditosUsados: 20,
-    driveLink: 'https://drive.google.com/drive/folders/1-exemplo-graziela',
-    historico: [
-      { data: '30/06', conteudo: '3 Reels (beleza)', creditos: 3, tipo: 'vídeo' },
-      { data: '28/06', conteudo: '2 Posts', creditos: 2, tipo: 'post' },
-      { data: '25/06', conteudo: '2 Carrosséis', creditos: 2, tipo: 'carrossel' },
-      { data: '22/06', conteudo: '5 Stories', creditos: 5, tipo: 'story' },
-      { data: '20/06', conteudo: '3 Reels (mentoria)', creditos: 3, tipo: 'vídeo' },
-      { data: '15/06', conteudo: '2 Posts', creditos: 2, tipo: 'post' },
-      { data: '10/06', conteudo: '1 Carrossel', creditos: 1, tipo: 'carrossel' }
-    ]
-  },
-  esponjao: { 
-    pass: 'esponjao2026', 
-    nome: 'Esponjão',
-    role: 'client',
-    creditos: 8,
-    creditosUsados: 3,
-    driveLink: 'https://drive.google.com/drive/folders/1-exemplo-esponjao',
-    historico: [
-      { data: '25/06', conteudo: '1 Reel', creditos: 1, tipo: 'vídeo' },
-      { data: '20/06', conteudo: '1 Post', creditos: 1, tipo: 'post' },
-      { data: '15/06', conteudo: '1 Story', creditos: 1, tipo: 'story' }
-    ]
-  }
+const firebaseConfig = {
+  apiKey: "AIzaSyB7LDhZHq9r2lhbAvoKGnItkkEMtvgCeZo",
+  authDomain: "gabsocial-portal.firebaseapp.com",
+  projectId: "gabsocial-portal",
+  storageBucket: "gabsocial-portal.firebasestorage.app",
+  messagingSenderId: "54783045930",
+  appId: "1:54783045930:web:64f2009ac8cc4c36cd2e53"
+};
+
+try {
+  firebase.initializeApp(firebaseConfig);
+  window.db = firebase.firestore();
+} catch (e) {
+  console.warn('Firebase não disponível');
+}
+
+const USUARIOS_DEMO = {
+  gabriela: { pass: 'admin123', role: 'admin' },
+  iarto: { pass: 'iarto2026', role: 'client', clientId: 'iarto' },
+  guerra: { pass: 'guerra2026', role: 'client', clientId: 'guerra' },
+  graziela: { pass: 'graziela2026', role: 'client', clientId: 'graziela' },
+  esponjao: { pass: 'esponjao2026', role: 'client', clientId: 'esponjao' }
 };
 
 let usuarioAtual = null;
+let clientes = [];
 
 function mostrarLogin() {
-  document.getElementById('logi
+  document.getElementById('loginModal').classList.remove('hidden');
+  document.getElementById('loginUser').focus();
+}
+
+function fecharLogin() {
+  document.getElementById('loginModal').classList.add('hidden');
+  document.getElementById('loginError').classList.add('hidden');
+  document.getElementById('loginUser').value = '';
+  document.getElementById('loginPass').value = '';
+}
+
+function tentarLogin() {
+  const user = document.getElementById('loginUser').value.trim();
+  const pass = document.getElementById('loginPass').value;
+  const erro = document.getElementById('loginError');
+  
+  if (!USUARIOS_DEMO[user] || USUARIOS_DEMO[user].pass !== pass) {
+    erro.textContent = 'Usuário ou senha incorretos.';
+    erro.classList.remove('hidden');
+    return;
+  }
+  
+  usuarioAtual = { user, ...USUARIOS_DEMO[user] };
+  erro.classList.add('hidden');
+  fecharLogin();
+  carregarDados();
+}
+
+function carregarDados() {
+  if (!db) {
+    mostrarTelaOffline();
+    return;
+  }
+
+  db.collection('clientes').onSnapshot(snapshot => {
+    clientes = [];
+    snapshot.forEach(doc => {
+      clientes.push({ id: doc.id, ...doc.data() });
+    });
+    
+    if (usuarioAtual.role === 'admin') {
+      mostrarAdmin();
+    } else {
+      mostrarClient();
+    }
+  });
+}
+
+function mostrarTelaOffline() {
+  if (usuarioAtual.role === 'admin') {
+    document.getElementById('homeScreen').classList.add('hidden');
+    document.getElementById('adminScreen').classList.remove('hidden');
+    carregarClientesDemo();
+    mudarTelaAdmin('clientes');
+  } else {
+    document.getElementById('homeScreen').classList.add('hidden');
+    document.getElementById('clientScreen').classList.remove('hidden');
+    mostrarDadosClient();
+  }
+}
+
+function carregarClientesDemo() {
+  clientes = [
+    { id: 'iarto', nome: 'IARTO Auto Center', niche: 'Pneus', creditos: 32, creditosUsados: 12, valor: 220, gdrive: 'https://drive.google.com/drive/folders/1-iarto', monday: '', trello: '' },
+    { id: 'guerra', nome: 'Eletro-refrigeração Guerra', niche: 'Refrigeração', creditos: 32, creditosUsados: 8, valor: 220, gdrive: 'https://drive.google.com/drive/folders/1-guerra', monday: '', trello: '' },
+    { id: 'graziela', nome: 'Graziela Salles', niche: 'Beleza', creditos: 40, creditosUsados: 20, valor: 220, gdrive: 'https://drive.google.com/drive/folders/1-graziela', monday: '', trello: '' },
+    { id: 'esponjao', nome: 'Esponjão', niche: 'Limpeza', creditos: 8, creditosUsados: 3, valor: 55, gdrive: 'https://drive.google.com/drive/folders/1-esponjao', monday: '', trello: '' }
+  ];
+}
+
+function mostrarAdmin() {
+  document.getElementById
