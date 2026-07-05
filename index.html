@@ -109,6 +109,25 @@
     <div id="listaClientes"></div>
   </div>
 
+  <!-- EDITAR -->
+  <div id="adminEditar" class="hidden bg-white rounded-xl border border-[#e4ded2] p-6 max-w-2xl">
+    <h2 class="serif text-2xl mb-6">Editar Cliente</h2>
+    <form onsubmit="saveCliente(event)" class="space-y-3">
+      <input type="text" id="editNome" placeholder="Nome" required class="w-full px-4 py-2 border border-[#e4ded2] rounded-md text-sm">
+      <input type="text" id="editNiche" placeholder="Nicho" required class="w-full px-4 py-2 border border-[#e4ded2] rounded-md text-sm">
+      <input type="number" id="editCreditos" placeholder="Créditos/mês" required class="w-full px-4 py-2 border border-[#e4ded2] rounded-md text-sm">
+      <input type="number" id="editUsado" placeholder="Créditos usados" required class="w-full px-4 py-2 border border-[#e4ded2] rounded-md text-sm">
+      <input type="number" id="editValor" placeholder="Valor/mês" required class="w-full px-4 py-2 border border-[#e4ded2] rounded-md text-sm">
+      <input type="url" id="editDrive" placeholder="Google Drive" class="w-full px-4 py-2 border border-[#e4ded2] rounded-md text-sm">
+      <input type="url" id="editMonday" placeholder="Monday" class="w-full px-4 py-2 border border-[#e4ded2] rounded-md text-sm">
+      <input type="url" id="editTrello" placeholder="Trello" class="w-full px-4 py-2 border border-[#e4ded2] rounded-md text-sm">
+      <div class="flex gap-3">
+        <button type="submit" class="flex-1 px-4 py-2 bg-[#6E2A3B] text-white rounded-md hover:bg-[#5a2130]">Salvar</button>
+        <button type="button" onclick="showAdminTab('lista')" class="flex-1 px-4 py-2 border border-[#e4ded2] rounded-md hover:bg-black/5">Cancelar</button>
+      </div>
+    </form>
+  </div>
+
   <!-- NOVO -->
   <div id="adminNovo" class="hidden bg-white rounded-xl border border-[#e4ded2] p-6 max-w-2xl">
     <h2 class="serif text-2xl mb-6">Novo Cliente</h2>
@@ -240,7 +259,10 @@ function logout() {
 function loadClientes() {
   const html = clientes.map(c => `
     <div class="bg-white rounded-xl border border-[#e4ded2] p-6">
-      <h3 class="font-semibold mb-2">${c.nome}</h3>
+      <div class="flex justify-between items-start mb-2">
+        <h3 class="font-semibold">${c.nome}</h3>
+        <button onclick="editCliente('${c.id}')" class="text-sm px-3 py-1 border border-[#e4ded2] rounded hover:bg-black/5">Editar</button>
+      </div>
       <p class="text-sm text-[#8a8378] mb-4">${c.niche} · ${c.creditos} créditos · R$ ${c.valor}</p>
       <div class="grid grid-cols-4 gap-2 text-xs">
         <div><span class="text-[#8a8378]">Usados:</span> ${c.usado}/${c.creditos}</div>
@@ -276,8 +298,47 @@ function addCliente(e) {
 function showAdminTab(tab) {
   document.getElementById('adminLista').classList.toggle('hidden', tab !== 'lista');
   document.getElementById('adminNovo').classList.toggle('hidden', tab !== 'novo');
+  document.getElementById('adminEditar').classList.toggle('hidden', tab !== 'editar');
   document.getElementById('tabLista').classList.toggle('border-[#6E2A3B]', tab === 'lista');
   document.getElementById('tabNovo').classList.toggle('border-[#6E2A3B]', tab === 'novo');
+}
+
+let editandoId = null;
+
+function editCliente(id) {
+  const c = clientes.find(x => x.id === id);
+  if (!c) return;
+  
+  editandoId = id;
+  document.getElementById('editNome').value = c.nome;
+  document.getElementById('editNiche').value = c.niche;
+  document.getElementById('editCreditos').value = c.creditos;
+  document.getElementById('editUsado').value = c.usado;
+  document.getElementById('editValor').value = c.valor;
+  document.getElementById('editDrive').value = c.drive;
+  document.getElementById('editMonday').value = c.monday;
+  document.getElementById('editTrello').value = c.trello;
+  
+  showAdminTab('editar');
+}
+
+function saveCliente(e) {
+  e.preventDefault();
+  const c = clientes.find(x => x.id === editandoId);
+  if (!c) return;
+  
+  c.nome = document.getElementById('editNome').value;
+  c.niche = document.getElementById('editNiche').value;
+  c.creditos = parseInt(document.getElementById('editCreditos').value);
+  c.usado = parseInt(document.getElementById('editUsado').value);
+  c.valor = parseInt(document.getElementById('editValor').value);
+  c.drive = document.getElementById('editDrive').value;
+  c.monday = document.getElementById('editMonday').value;
+  c.trello = document.getElementById('editTrello').value;
+  
+  loadClientes();
+  showAdminTab('lista');
+  editandoId = null;
 }
 
 function loadClient() {
