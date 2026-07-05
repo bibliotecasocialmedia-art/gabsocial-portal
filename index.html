@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GabSocial Media — Estratégia de conteúdo</title>
+<title>GabSocial Media</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -13,54 +13,43 @@
 </head>
 <body class="bg-[#FAF8F3] text-[#1c1b1f]">
 
-<!-- NAVBAR -->
+<!-- HOME -->
+<div id="home" class="block">
+
 <header class="sticky top-0 z-40 bg-[#FAF8F3]/90 backdrop-blur border-b border-[#e4ded2]">
   <div class="max-w-6xl mx-auto px-5 md:px-8 h-16 flex items-center justify-between">
-    <span class="serif text-lg tracking-tight cursor-pointer" onclick="voltarHome()">GabSocial<span class="text-[#6E2A3B]">.</span></span>
-    <nav class="hidden md:flex items-center gap-7 text-sm text-[#4a453d]">
-      <a href="#inicio" class="hover:text-[#6E2A3B]">Início</a>
-      <a href="#como" class="hover:text-[#6E2A3B]">Como funciona</a>
-      <a href="#pacotes" class="hover:text-[#6E2A3B]">Pacotes</a>
-      <a href="#clientes" class="hover:text-[#6E2A3B]">Clientes</a>
-    </nav>
-    <button onclick="mostrarLogin()" class="px-4 py-2 text-sm border border-[#1c1b1f]/20 rounded-md hover:bg-black/5">Acesso</button>
+    <span class="serif text-lg">GabSocial<span class="text-[#6E2A3B]">.</span></span>
+    <button onclick="showLogin()" class="px-4 py-2 text-sm border border-[#1c1b1f]/20 rounded-md hover:bg-black/5">Acesso</button>
   </div>
 </header>
 
-<!-- HOME SCREEN -->
-<div id="homeScreen">
-
-<!-- HERO -->
-<section id="inicio" class="max-w-6xl mx-auto px-5 md:px-8 pt-20 pb-20">
-  <div class="grid md:grid-cols-[1.2fr_0.8fr] gap-12 items-center">
+<section class="max-w-6xl mx-auto px-5 md:px-8 pt-20 pb-20">
+  <div class="grid md:grid-cols-2 gap-12 items-center">
     <div>
-      <p class="uppercase tracking-[0.2em] text-[11px] text-[#B99257] font-semibold mb-4">GabSocial Media</p>
-      <h1 class="serif text-4xl md:text-6xl leading-[1.05] mb-6">Estratégia antes de estética.</h1>
-      <p class="text-[#4a453d] text-base md:text-lg max-w-lg mb-8">Planejamento, produção de conteúdo e gestão de redes sociais para negócios que querem crescer com direção — não só com posts bonitos.</p>
-      <div class="flex flex-wrap gap-3">
-        <button onclick="mostrarLogin()" class="px-6 py-2 bg-[#6E2A3B] text-white rounded-md hover:bg-[#5a2130]">Entrar →</button>
-        <button onclick="scrollTo('contato')" class="px-6 py-2 border border-[#1c1b1f]/20 rounded-md hover:bg-black/5">Solicitar proposta</button>
+      <p class="text-[#B99257] text-sm font-semibold mb-4">GABSOCIAL MEDIA</p>
+      <h1 class="serif text-5xl md:text-6xl leading-tight mb-6">Estratégia antes de estética.</h1>
+      <p class="text-[#4a453d] text-lg mb-8">Planejamento, produção e gestão de redes sociais para negócios que querem crescer com direção.</p>
+      <div class="flex gap-3">
+        <button onclick="showLogin()" class="px-6 py-3 bg-[#6E2A3B] text-white rounded-md hover:bg-[#5a2130]">Entrar</button>
+        <button onclick="document.getElementById('contato').scrollIntoView({behavior:'smooth'})" class="px-6 py-3 border border-[#1c1b1f]/20 rounded-md hover:bg-black/5">Propostas</button>
       </div>
     </div>
-    <div class="bg-[#1c1b1f] text-[#FAF8F3] rounded-2xl p-6">
-      <p class="text-[11px] uppercase tracking-[0.2em] text-[#B99257] mb-4">Atividade · Julho 2026</p>
+    <div class="bg-[#1c1b1f] text-white rounded-2xl p-8">
+      <p class="text-[#B99257] text-xs font-semibold mb-6">ATIVIDADE JULHO 2026</p>
       <div class="space-y-4">
         <div>
-          <div class="flex justify-between text-sm mb-1.5">
-            <span class="text-[#c9c4b8]">Clientes ativos</span>
-            <span class="serif">4</span>
+          <div class="flex justify-between mb-2">
+            <span class="text-sm">Clientes ativos</span>
+            <span class="font-bold">4</span>
           </div>
-          <div class="h-[3px] bg-white/10 rounded-full overflow-hidden">
+          <div class="h-2 bg-white/10 rounded-full overflow-hidden">
             <div class="h-full bg-[#B99257] w-4/5"></div>
           </div>
         </div>
         <div>
-          <div class="flex justify-between text-sm mb-1.5">
-            <span class="text-[#c9c4b8]">Créditos em circulação</span>
-            <span class="serif">120</span>
-          </div>
-          <div class="h-[3px] bg-white/10 rounded-full overflow-hidden">
-            <div class="h-full bg-[#B99257] w-3/4"></div>
+          <div class="flex justify-between mb-2">
+            <span class="text-sm">Créditos em circulação</span>
+            <span class="font-bold">120</span>
           </div>
         </div>
       </div>
@@ -68,323 +57,257 @@
   </div>
 </section>
 
-<!-- COMO FUNCIONA -->
-<section id="como" class="bg-white border-y border-[#e4ded2] py-20">
-  <div class="max-w-6xl mx-auto px-5 md:px-8">
-    <h2 class="serif text-3xl mb-12">Como eu trabalho</h2>
-    <div class="grid md:grid-cols-3 gap-8">
-      <div>
-        <div class="w-9 h-9 rounded-full bg-[#6E2A3B]/10 flex items-center justify-center mb-4 text-lg">✦</div>
-        <h3 class="serif text-lg mb-2">Estratégia primeiro</h3>
-        <p class="text-sm text-[#4a453d]">Nenhuma arte sai do papel sem entender o negócio, público e objetivo.</p>
-      </div>
-      <div>
-        <div class="w-9 h-9 rounded-full bg-[#6E2A3B]/10 flex items-center justify-center mb-4 text-lg">💼</div>
-        <h3 class="serif text-lg mb-2">Parceria de verdade</h3>
-        <p class="text-sm text-[#4a453d]">Atuo como parte do time — da análise ao resultado, com transparência.</p>
-      </div>
-      <div>
-        <div class="w-9 h-9 rounded-full bg-[#6E2A3B]/10 flex items-center justify-center mb-4 text-lg">✓</div>
-        <h3 class="serif text-lg mb-2">Design com propósito</h3>
-        <p class="text-sm text-[#4a453d]">Estética limpa a serviço de gatilhos psicológicos e storytelling.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- PACOTES -->
-<section id="pacotes" class="max-w-6xl mx-auto px-5 md:px-8 py-20">
-  <h2 class="serif text-3xl mb-2">Pacotes mensais</h2>
-  <p class="text-[#4a453d] mb-12 max-w-xl">Sistema de créditos: 1 arte = 1 crédito · carrossel = 1 por página · vídeo = 3.</p>
-  <div class="grid md:grid-cols-3 gap-6">
-    <div class="rounded-xl p-6 border border-[#e4ded2] bg-white">
-      <h3 class="serif text-xl mb-1">START</h3>
-      <p class="text-3xl serif mb-1 text-[#1c1b1f]">R$180<span class="text-sm">/mês</span></p>
-      <p class="text-xs text-[#8a8378] mb-5">12 créditos</p>
-      <button onclick="mostrarLogin()" class="w-full px-4 py-2 text-sm border border-[#1c1b1f]/20 rounded-md hover:bg-black/5">Escolher</button>
-    </div>
-    <div class="rounded-xl p-6 border-2 border-[#6E2A3B] bg-[#6E2A3B] text-white">
-      <p class="text-[11px] uppercase tracking-wide text-[#B99257] mb-2 font-semibold">Mais procurado</p>
-      <h3 class="serif text-xl mb-1">CRESCIMENTO</h3>
-      <p class="text-3xl serif mb-1 text-[#B99257]">R$240<span class="text-sm">/mês</span></p>
-      <p class="text-xs text-white/70 mb-5">25 créditos</p>
-      <button onclick="mostrarLogin()" class="w-full px-4 py-2 text-sm bg-[#B99257] text-[#1c1b1f] rounded-md hover:bg-[#a5814b] font-medium">Escolher</button>
-    </div>
-    <div class="rounded-xl p-6 border border-[#e4ded2] bg-white">
-      <h3 class="serif text-xl mb-1">AUTORIDADE</h3>
-      <p class="text-3xl serif mb-1 text-[#1c1b1f]">R$320<span class="text-sm">/mês</span></p>
-      <p class="text-xs text-[#8a8378] mb-5">50 créditos</p>
-      <button onclick="mostrarLogin()" class="w-full px-4 py-2 text-sm border border-[#1c1b1f]/20 rounded-md hover:bg-black/5">Escolher</button>
-    </div>
-  </div>
-</section>
-
-<!-- CLIENTES -->
-<section id="clientes" class="bg-[#1c1b1f] text-[#FAF8F3] py-20">
-  <div class="max-w-6xl mx-auto px-5 md:px-8">
-    <h2 class="serif text-3xl mb-10">Clientes</h2>
-    <div class="grid sm:grid-cols-2 md:grid-cols-4 gap-5">
-      <div class="border border-white/10 rounded-xl p-5">
-        <div class="text-lg mb-3">🏅</div>
-        <p class="font-semibold text-sm mb-1">IARTO Auto Center</p>
-        <p class="text-xs text-[#c9c4b8]">Pneus e rodas</p>
-      </div>
-      <div class="border border-white/10 rounded-xl p-5">
-        <div class="text-lg mb-3">🏅</div>
-        <p class="font-semibold text-sm mb-1">Eletro-refrigeração Guerra</p>
-        <p class="text-xs text-[#c9c4b8]">Refrigeração</p>
-      </div>
-      <div class="border border-white/10 rounded-xl p-5">
-        <div class="text-lg mb-3">🏅</div>
-        <p class="font-semibold text-sm mb-1">Graziela Salles</p>
-        <p class="text-xs text-[#c9c4b8]">Beleza</p>
-      </div>
-      <div class="border border-white/10 rounded-xl p-5">
-        <div class="text-lg mb-3">🏅</div>
-        <p class="font-semibold text-sm mb-1">Esponjão</p>
-        <p class="text-xs text-[#c9c4b8]">Limpeza</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CONTATO -->
 <section id="contato" class="max-w-6xl mx-auto px-5 md:px-8 py-20">
-  <div class="bg-white rounded-2xl border border-[#e4ded2] p-8 md:p-12">
-    <h2 class="serif text-3xl mb-2">Vamos conversar?</h2>
-    <p class="text-[#4a453d] mb-8 max-w-lg">Fale comigo sobre seu projeto.</p>
-    
-    <form onsubmit="enviarWhatsApp(event)" class="max-w-md">
-      <div class="mb-4">
-        <input id="contatoNome" type="text" placeholder="Seu nome" required class="w-full bg-[#FAF8F3] border border-[#e4ded2] rounded-md px-3 py-2 text-sm">
-      </div>
-      <div class="mb-4">
-        <input id="contatoEmpresa" type="text" placeholder="Sua empresa" required class="w-full bg-[#FAF8F3] border border-[#e4ded2] rounded-md px-3 py-2 text-sm">
-      </div>
-      <div class="mb-4">
-        <textarea id="contatoMsg" placeholder="Sua mensagem..." required rows="4" class="w-full bg-[#FAF8F3] border border-[#e4ded2] rounded-md px-3 py-2 text-sm"></textarea>
-      </div>
-      <button type="submit" class="w-full bg-[#6E2A3B] text-white py-2 rounded-md hover:bg-[#5a2130] font-medium">Enviar via WhatsApp →</button>
+  <h2 class="serif text-4xl mb-12">Vamos conversar?</h2>
+  <div class="max-w-md">
+    <form onsubmit="sendWhatsApp(event)">
+      <input type="text" id="nome" placeholder="Seu nome" required class="w-full mb-3 px-4 py-2 border border-[#e4ded2] rounded-md">
+      <input type="text" id="empresa" placeholder="Sua empresa" required class="w-full mb-3 px-4 py-2 border border-[#e4ded2] rounded-md">
+      <textarea id="msg" placeholder="Sua mensagem" required rows="4" class="w-full mb-3 px-4 py-2 border border-[#e4ded2] rounded-md"></textarea>
+      <button type="submit" class="w-full px-4 py-2 bg-[#6E2A3B] text-white rounded-md hover:bg-[#5a2130]">Enviar via WhatsApp</button>
     </form>
   </div>
 </section>
 
-<!-- FOOTER -->
-<footer class="max-w-6xl mx-auto px-5 md:px-8 py-16 border-t border-[#e4ded2]">
-  <span class="serif text-lg">GabSocial<span class="text-[#6E2A3B]">.</span></span>
-  <p class="text-sm text-[#4a453d] mt-2 max-w-sm">Estratégia, conteúdo e gestão — do planejamento ao resultado.</p>
+<footer class="border-t border-[#e4ded2] py-8 text-center text-sm text-[#8a8378]">
+  <p>GabSocial Media © 2026</p>
 </footer>
 
 </div>
 
-<!-- ADMIN DASHBOARD -->
-<div id="adminScreen" class="hidden min-h-screen bg-[#FAF8F3]">
-  <header class="bg-[#1c1b1f] text-[#FAF8F3] py-4 border-b border-[#e4ded2]">
-    <div class="max-w-6xl mx-auto px-5 md:px-8 flex items-center justify-between">
-      <span class="serif text-lg">GabSocial<span class="text-[#B99257]">.</span> Admin</span>
-      <button onclick="fazerLogout()" class="px-4 py-2 text-sm border border-white/20 rounded-md hover:bg-white/10">Sair</button>
-    </div>
-  </header>
-
-  <div class="max-w-6xl mx-auto px-5 md:px-8 py-8">
-    <div class="flex gap-3 mb-8 border-b border-[#e4ded2]">
-      <button onclick="mudarTelaAdmin('clientes')" id="abaPrincipal" class="pb-3 px-3 text-sm font-medium border-b-2 border-[#6E2A3B] text-[#6E2A3B]">Clientes</button>
-      <button onclick="mudarTelaAdmin('novo')" id="abaNovo" class="pb-3 px-3 text-sm font-medium border-b-2 border-transparent text-[#4a453d] hover:text-[#1c1b1f]">+ Novo</button>
-    </div>
-
-    <!-- ABA CLIENTES -->
-    <div id="telaClientes" class="space-y-4">
-      <div id="listaClientes" class="space-y-3"></div>
-    </div>
-
-    <!-- ABA NOVO -->
-    <div id="telaNovo" class="hidden bg-white rounded-xl border border-[#e4ded2] p-6 max-w-2xl">
-      <h2 class="serif text-2xl mb-6">Novo Cliente</h2>
-      <form onsubmit="adicionarCliente(event)" class="space-y-4">
-        <input id="novoNome" type="text" placeholder="Nome" required class="w-full bg-[#FAF8F3] border border-[#e4ded2] rounded-md px-3 py-2 text-sm">
-        <input id="novoNiche" type="text" placeholder="Nicho" required class="w-full bg-[#FAF8F3] border border-[#e4ded2] rounded-md px-3 py-2 text-sm">
-        <input id="novoCreditos" type="number" placeholder="Créditos mensais" required class="w-full bg-[#FAF8F3] border border-[#e4ded2] rounded-md px-3 py-2 text-sm">
-        <input id="novoValor" type="number" placeholder="Valor mensal" required class="w-full bg-[#FAF8F3] border border-[#e4ded2] rounded-md px-3 py-2 text-sm">
-        <input id="novoGDrive" type="url" placeholder="Google Drive link" class="w-full bg-[#FAF8F3] border border-[#e4ded2] rounded-md px-3 py-2 text-sm">
-        <input id="novoMonday" type="url" placeholder="Monday link" class="w-full bg-[#FAF8F3] border border-[#e4ded2] rounded-md px-3 py-2 text-sm">
-        <input id="novoTrello" type="url" placeholder="Trello link" class="w-full bg-[#FAF8F3] border border-[#e4ded2] rounded-md px-3 py-2 text-sm">
-        <button type="submit" class="w-full bg-[#6E2A3B] text-white py-2 rounded-md hover:bg-[#5a2130] font-medium">Criar</button>
-      </form>
-    </div>
+<!-- LOGIN -->
+<div id="login" class="hidden fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-4">
+  <div class="bg-white rounded-xl p-8 w-full max-w-md">
+    <h2 class="serif text-2xl mb-6">Acesso</h2>
+    <input type="text" id="user" placeholder="Usuário" class="w-full mb-3 px-4 py-2 border border-[#e4ded2] rounded-md">
+    <input type="password" id="pass" placeholder="Senha" class="w-full mb-3 px-4 py-2 border border-[#e4ded2] rounded-md">
+    <div id="erro" class="text-red-600 text-sm mb-3 hidden"></div>
+    <button onclick="login()" class="w-full px-4 py-2 bg-[#6E2A3B] text-white rounded-md hover:bg-[#5a2130] mb-3">Entrar</button>
+    <button onclick="closeLogin()" class="w-full px-4 py-2 border border-[#e4ded2] rounded-md">Voltar</button>
+    <p class="text-xs text-[#8a8378] text-center mt-4">Demo: gabriela/admin123</p>
   </div>
 </div>
 
-<!-- CLIENT DASHBOARD -->
-<div id="clientScreen" class="hidden min-h-screen bg-[#FAF8F3]">
-  <header class="bg-[#1c1b1f] text-[#FAF8F3] py-4 border-b border-[#e4ded2]">
-    <div class="max-w-6xl mx-auto px-5 md:px-8 flex items-center justify-between">
-      <div>
-        <span class="serif text-lg">GabSocial<span class="text-[#B99257]">.</span></span>
-        <p class="text-xs text-[#c9c4b8]" id="clientNome"></p>
-      </div>
-      <button onclick="fazerLogout()" class="px-4 py-2 text-sm border border-white/20 rounded-md hover:bg-white/10">Sair</button>
-    </div>
-  </header>
+<!-- ADMIN -->
+<div id="admin" class="hidden min-h-screen bg-[#FAF8F3]">
 
-  <div class="max-w-6xl mx-auto px-5 md:px-8 py-8">
-    <div class="grid md:grid-cols-4 gap-4 mb-8">
-      <div class="bg-white rounded-xl border border-[#e4ded2] p-4">
-        <p class="text-[11px] uppercase tracking-wide text-[#8a8378] mb-2">Usados</p>
-        <p class="serif text-2xl text-[#6E2A3B]" id="clientUsados">0</p>
-      </div>
-      <div class="bg-white rounded-xl border border-[#e4ded2] p-4">
-        <p class="text-[11px] uppercase tracking-wide text-[#8a8378] mb-2">Restantes</p>
-        <p class="serif text-2xl text-[#B99257]" id="clientRestantes">0</p>
-      </div>
-      <div class="bg-white rounded-xl border border-[#e4ded2] p-4">
-        <p class="text-[11px] uppercase tracking-wide text-[#8a8378] mb-2">Total</p>
-        <p class="serif text-2xl text-[#1c1b1f]" id="clientTotal">0</p>
-      </div>
-      <div class="bg-white rounded-xl border border-[#e4ded2] p-4">
-        <p class="text-[11px] uppercase tracking-wide text-[#8a8378] mb-2">Status</p>
-        <p class="serif text-lg text-green-600">✓ Ativo</p>
-      </div>
-    </div>
+<header class="bg-[#1c1b1f] text-white py-4 border-b border-[#e4ded2]">
+  <div class="max-w-6xl mx-auto px-5 md:px-8 flex justify-between items-center">
+    <span class="serif text-lg">GabSocial<span class="text-[#B99257]">.</span></span>
+    <button onclick="logout()" class="px-4 py-2 text-sm border border-white/20 rounded-md hover:bg-white/10">Sair</button>
+  </div>
+</header>
 
-    <div class="space-y-4">
-      <a id="linkGDrive" href="#" target="_blank" class="block bg-white rounded-xl border border-[#e4ded2] p-6 hover:border-[#6E2A3B] transition">
-        <p class="font-medium">📁 Google Drive</p>
-      </a>
-      <a id="linkMonday" href="#" target="_blank" class="block bg-white rounded-xl border border-[#e4ded2] p-6 hover:border-[#6E2A3B] transition">
-        <p class="font-medium">📊 Monday</p>
-      </a>
-      <a id="linkTrello" href="#" target="_blank" class="block bg-white rounded-xl border border-[#e4ded2] p-6 hover:border-[#6E2A3B] transition">
-        <p class="font-medium">✓ Trello</p>
-      </a>
-    </div>
+<div class="max-w-6xl mx-auto px-5 md:px-8 py-8">
+  <div class="flex gap-4 mb-8 border-b border-[#e4ded2]">
+    <button onclick="showAdminTab('lista')" id="tabLista" class="pb-3 px-3 text-sm font-medium border-b-2 border-[#6E2A3B] text-[#6E2A3B]">Clientes</button>
+    <button onclick="showAdminTab('novo')" id="tabNovo" class="pb-3 px-3 text-sm font-medium border-b-2 border-transparent text-[#4a453d]">+ Novo</button>
+  </div>
+
+  <!-- LISTA -->
+  <div id="adminLista" class="space-y-4">
+    <div id="listaClientes"></div>
+  </div>
+
+  <!-- NOVO -->
+  <div id="adminNovo" class="hidden bg-white rounded-xl border border-[#e4ded2] p-6 max-w-2xl">
+    <h2 class="serif text-2xl mb-6">Novo Cliente</h2>
+    <form onsubmit="addCliente(event)" class="space-y-3">
+      <input type="text" id="addNome" placeholder="Nome" required class="w-full px-4 py-2 border border-[#e4ded2] rounded-md text-sm">
+      <input type="text" id="addNiche" placeholder="Nicho" required class="w-full px-4 py-2 border border-[#e4ded2] rounded-md text-sm">
+      <input type="number" id="addCreditos" placeholder="Créditos/mês" required class="w-full px-4 py-2 border border-[#e4ded2] rounded-md text-sm">
+      <input type="number" id="addValor" placeholder="Valor/mês" required class="w-full px-4 py-2 border border-[#e4ded2] rounded-md text-sm">
+      <input type="url" id="addDrive" placeholder="Google Drive" class="w-full px-4 py-2 border border-[#e4ded2] rounded-md text-sm">
+      <input type="url" id="addMonday" placeholder="Monday" class="w-full px-4 py-2 border border-[#e4ded2] rounded-md text-sm">
+      <input type="url" id="addTrello" placeholder="Trello" class="w-full px-4 py-2 border border-[#e4ded2] rounded-md text-sm">
+      <button type="submit" class="w-full px-4 py-2 bg-[#6E2A3B] text-white rounded-md hover:bg-[#5a2130]">Criar</button>
+    </form>
   </div>
 </div>
 
-<!-- MODAL LOGIN -->
-<div id="loginModal" class="hidden fixed inset-0 z-50 bg-[#1c1b1f]/50 flex items-center justify-center p-4">
-  <div class="bg-[#FAF8F3] rounded-2xl p-8 w-full max-w-md">
-    <div class="flex justify-between items-center mb-6">
-      <h2 class="serif text-2xl">Acesso</h2>
-      <button onclick="fecharLogin()" class="text-[#8a8378] text-2xl">×</button>
+</div>
+
+<!-- CLIENT -->
+<div id="client" class="hidden min-h-screen bg-[#FAF8F3]">
+
+<header class="bg-[#1c1b1f] text-white py-4 border-b border-[#e4ded2]">
+  <div class="max-w-6xl mx-auto px-5 md:px-8 flex justify-between items-center">
+    <div>
+      <span class="serif text-lg">GabSocial<span class="text-[#B99257]">.</span></span>
+      <p class="text-xs text-[#c9c4b8]" id="clientName"></p>
     </div>
-    <div class="mb-4">
-      <input id="loginUser" type="text" placeholder="Usuário" class="w-full bg-white border border-[#e4ded2] rounded-md px-3 py-2 text-sm">
-    </div>
-    <div class="mb-4">
-      <input id="loginPass" type="password" placeholder="Senha" class="w-full bg-white border border-[#e4ded2] rounded-md px-3 py-2 text-sm">
-    </div>
-    <div id="loginError" class="text-[#a13a3a] text-sm mb-4 hidden"></div>
-    <button onclick="tentarLogin()" class="w-full bg-[#6E2A3B] text-white py-2 rounded-md hover:bg-[#5a2130] font-medium mb-3">Entrar</button>
-    <p class="text-xs text-[#8a8378] text-center">Demo: gabriela / admin123</p>
+    <button onclick="logout()" class="px-4 py-2 text-sm border border-white/20 rounded-md hover:bg-white/10">Sair</button>
   </div>
+</header>
+
+<div class="max-w-6xl mx-auto px-5 md:px-8 py-8">
+  <div class="grid md:grid-cols-4 gap-4 mb-8">
+    <div class="bg-white rounded-xl border border-[#e4ded2] p-4">
+      <p class="text-xs text-[#8a8378] mb-2">Usados</p>
+      <p class="serif text-2xl text-[#6E2A3B]" id="usados">0</p>
+    </div>
+    <div class="bg-white rounded-xl border border-[#e4ded2] p-4">
+      <p class="text-xs text-[#8a8378] mb-2">Restantes</p>
+      <p class="serif text-2xl text-[#B99257]" id="restantes">0</p>
+    </div>
+    <div class="bg-white rounded-xl border border-[#e4ded2] p-4">
+      <p class="text-xs text-[#8a8378] mb-2">Total</p>
+      <p class="serif text-2xl text-[#1c1b1f]" id="total">0</p>
+    </div>
+    <div class="bg-white rounded-xl border border-[#e4ded2] p-4">
+      <p class="text-xs text-[#8a8378] mb-2">Status</p>
+      <p class="serif text-lg text-green-600">✓ Ativo</p>
+    </div>
+  </div>
+
+  <div class="space-y-3">
+    <a id="linkDrive" href="#" target="_blank" class="block bg-white rounded-xl border border-[#e4ded2] p-6 hover:border-[#6E2A3B] transition">
+      <p class="font-medium">📁 Google Drive</p>
+    </a>
+    <a id="linkMonday" href="#" target="_blank" class="block bg-white rounded-xl border border-[#e4ded2] p-6 hover:border-[#6E2A3B] transition">
+      <p class="font-medium">📊 Monday</p>
+    </a>
+    <a id="linkTrello" href="#" target="_blank" class="block bg-white rounded-xl border border-[#e4ded2] p-6 hover:border-[#6E2A3B] transition">
+      <p class="font-medium">✓ Trello</p>
+    </a>
+  </div>
+</div>
+
 </div>
 
 <script>
-const USUARIOS = {
+const users = {
   gabriela: { pass: 'admin123', role: 'admin' },
-  iarto: { pass: 'iarto2026', role: 'client', nome: 'IARTO Auto Center', creditos: 32, creditosUsados: 12 },
-  guerra: { pass: 'guerra2026', role: 'client', nome: 'Eletro-refrigeração Guerra', creditos: 32, creditosUsados: 8 },
-  graziela: { pass: 'graziela2026', role: 'client', nome: 'Graziela Salles', creditos: 40, creditosUsados: 20 },
-  esponjao: { pass: 'esponjao2026', role: 'client', nome: 'Esponjão', creditos: 8, creditosUsados: 3 }
+  iarto: { pass: 'iarto2026', role: 'client', nome: 'IARTO Auto Center' },
+  guerra: { pass: 'guerra2026', role: 'client', nome: 'Eletro-refrigeração Guerra' },
+  graziela: { pass: 'graziela2026', role: 'client', nome: 'Graziela Salles' },
+  esponjao: { pass: 'esponjao2026', role: 'client', nome: 'Esponjão' }
 };
 
-let usuarioAtual = null;
+let currentUser = null;
 let clientes = [
-  { id: 'iarto', nome: 'IARTO Auto Center', niche: 'Pneus', creditos: 32, creditosUsados: 12, valor: 220, gdrive: 'https://drive.google.com/drive/folders/1-iarto', monday: '', trello: '' },
-  { id: 'guerra', nome: 'Eletro-refrigeração Guerra', niche: 'Refrigeração', creditos: 32, creditosUsados: 8, valor: 220, gdrive: 'https://drive.google.com/drive/folders/1-guerra', monday: '', trello: '' },
-  { id: 'graziela', nome: 'Graziela Salles', niche: 'Beleza', creditos: 40, creditosUsados: 20, valor: 220, gdrive: 'https://drive.google.com/drive/folders/1-graziela', monday: '', trello: '' },
-  { id: 'esponjao', nome: 'Esponjão', niche: 'Limpeza', creditos: 8, creditosUsados: 3, valor: 55, gdrive: 'https://drive.google.com/drive/folders/1-esponjao', monday: '', trello: '' }
+  { id: 'iarto', nome: 'IARTO Auto Center', niche: 'Pneus', creditos: 32, usado: 12, valor: 220, user: 'iarto', drive: 'https://drive.google.com/drive/folders/1-iarto', monday: '', trello: '' },
+  { id: 'guerra', nome: 'Eletro-refrigeração Guerra', niche: 'Refrigeração', creditos: 32, usado: 8, valor: 220, user: 'guerra', drive: 'https://drive.google.com/drive/folders/1-guerra', monday: '', trello: '' },
+  { id: 'graziela', nome: 'Graziela Salles', niche: 'Beleza', creditos: 40, usado: 20, valor: 220, user: 'graziela', drive: 'https://drive.google.com/drive/folders/1-graziela', monday: '', trello: '' },
+  { id: 'esponjao', nome: 'Esponjão', niche: 'Limpeza', creditos: 8, usado: 3, valor: 55, user: 'esponjao', drive: 'https://drive.google.com/drive/folders/1-esponjao', monday: '', trello: '' }
 ];
 
-function mostrarLogin() {
-  document.getElementById('loginModal').classList.remove('hidden');
-  document.getElementById('loginUser').focus();
+function showLogin() {
+  document.getElementById('login').classList.remove('hidden');
+  document.getElementById('user').focus();
 }
 
-function fecharLogin() {
-  document.getElementById('loginModal').classList.add('hidden');
-  document.getElementById('loginError').classList.add('hidden');
-  document.getElementById('loginUser').value = '';
-  document.getElementById('loginPass').value = '';
+function closeLogin() {
+  document.getElementById('login').classList.add('hidden');
+  document.getElementById('user').value = '';
+  document.getElementById('pass').value = '';
+  document.getElementById('erro').classList.add('hidden');
 }
 
-function tentarLogin() {
-  const user = document.getElementById('loginUser').value.trim();
-  const pass = document.getElementById('loginPass').value;
-  const erro = document.getElementById('loginError');
+function login() {
+  const user = document.getElementById('user').value;
+  const pass = document.getElementById('pass').value;
   
-  if (!USUARIOS[user] || USUARIOS[user].pass !== pass) {
-    erro.textContent = 'Usuário ou senha incorretos.';
-    erro.classList.remove('hidden');
+  if (!users[user] || users[user].pass !== pass) {
+    document.getElementById('erro').textContent = 'Inválido';
+    document.getElementById('erro').classList.remove('hidden');
     return;
   }
   
-  usuarioAtual = { user, ...USUARIOS[user] };
-  erro.classList.add('hidden');
-  fecharLogin();
+  currentUser = { user, ...users[user] };
+  closeLogin();
   
-  if (usuarioAtual.role === 'admin') {
-    document.getElementById('homeScreen').classList.add('hidden');
-    document.getElementById('adminScreen').classList.remove('hidden');
-    renderizarClientes();
+  document.getElementById('home').classList.add('hidden');
+  document.getElementById('login').classList.add('hidden');
+  
+  if (currentUser.role === 'admin') {
+    document.getElementById('admin').classList.remove('hidden');
+    loadClientes();
   } else {
-    document.getElementById('homeScreen').classList.add('hidden');
-    document.getElementById('clientScreen').classList.remove('hidden');
-    mostrarDadosClient();
+    document.getElementById('client').classList.remove('hidden');
+    loadClient();
   }
 }
 
-function renderizarClientes() {
-  const lista = document.getElementById('listaClientes');
-  lista.innerHTML = '';
-  
-  clientes.forEach(c => {
-    const div = document.createElement('div');
-    div.className = 'bg-white rounded-xl border border-[#e4ded2] p-6';
-    div.innerHTML = `
+function logout() {
+  currentUser = null;
+  document.getElementById('home').classList.remove('hidden');
+  document.getElementById('admin').classList.add('hidden');
+  document.getElementById('client').classList.add('hidden');
+  window.scrollTo(0, 0);
+}
+
+function loadClientes() {
+  const html = clientes.map(c => `
+    <div class="bg-white rounded-xl border border-[#e4ded2] p-6">
       <h3 class="font-semibold mb-2">${c.nome}</h3>
       <p class="text-sm text-[#8a8378] mb-4">${c.niche} · ${c.creditos} créditos · R$ ${c.valor}</p>
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-2 text-xs">
-        <div><span class="text-[#8a8378]">Usados:</span> ${c.creditosUsados}/${c.creditos}</div>
-        <a href="${c.gdrive || '#'}" target="_blank" class="text-[#6E2A3B] hover:underline">📁 Drive</a>
-        <a href="${c.monday || '#'}" target="_blank" class="text-[#6E2A3B] hover:underline ${!c.monday ? 'opacity-50 pointer-events-none' : ''}">📊 Monday</a>
-        <a href="${c.trello || '#'}" target="_blank" class="text-[#6E2A3B] hover:underline ${!c.trello ? 'opacity-50 pointer-events-none' : ''}">✓ Trello</a>
+      <div class="grid grid-cols-4 gap-2 text-xs">
+        <div><span class="text-[#8a8378]">Usados:</span> ${c.usado}/${c.creditos}</div>
+        <a href="${c.drive}" target="_blank" class="text-[#6E2A3B] hover:underline">📁 Drive</a>
+        <a href="${c.monday || '#'}" target="_blank" class="text-[#6E2A3B] hover:underline ${!c.monday ? 'opacity-50' : ''}">📊 Monday</a>
+        <a href="${c.trello || '#'}" target="_blank" class="text-[#6E2A3B] hover:underline ${!c.trello ? 'opacity-50' : ''}">✓ Trello</a>
       </div>
-    `;
-    lista.appendChild(div);
-  });
+    </div>
+  `).join('');
+  document.getElementById('listaClientes').innerHTML = html;
 }
 
-function adicionarCliente(e) {
+function addCliente(e) {
   e.preventDefault();
-  
-  const novoCliente = {
+  const novo = {
     id: Date.now().toString(),
-    nome: document.getElementById('novoNome').value,
-    niche: document.getElementById('novoNiche').value,
-    creditos: parseInt(document.getElementById('novoCreditos').value),
-    creditosUsados: 0,
-    valor: parseInt(document.getElementById('novoValor').value),
-    gdrive: document.getElementById('novoGDrive').value,
-    monday: document.getElementById('novoMonday').value,
-    trello: document.getElementById('novoTrello').value
+    nome: document.getElementById('addNome').value,
+    niche: document.getElementById('addNiche').value,
+    creditos: parseInt(document.getElementById('addCreditos').value),
+    usado: 0,
+    valor: parseInt(document.getElementById('addValor').value),
+    user: document.getElementById('addNome').value.toLowerCase().replace(/\s/g, ''),
+    drive: document.getElementById('addDrive').value,
+    monday: document.getElementById('addMonday').value,
+    trello: document.getElementById('addTrello').value
   };
-  
-  clientes.push(novoCliente);
+  clientes.push(novo);
   document.querySelector('form').reset();
-  renderizarClientes();
-  mudarTelaAdmin('clientes');
+  loadClientes();
+  showAdminTab('lista');
 }
 
-function mostrarDadosClient() {
-  const cliente = clientes.find(c => c.id === usuarioAtual.user);
-  if (!cliente) return;
+function showAdminTab(tab) {
+  document.getElementById('adminLista').classList.toggle('hidden', tab !== 'lista');
+  document.getElementById('adminNovo').classList.toggle('hidden', tab !== 'novo');
+  document.getElementById('tabLista').classList.toggle('border-[#6E2A3B]', tab === 'lista');
+  document.getElementById('tabNovo').classList.toggle('border-[#6E2A3B]', tab === 'novo');
+}
+
+function loadClient() {
+  const c = clientes.find(x => x.user === currentUser.user);
+  if (!c) return;
   
-  document.getElementById('clientNome').textContent = cliente.nome;
-  document.getElementById('clientUsados').textContent = cliente.creditosUsados;
-  document.getElementById('clientRestantes').textContent = cliente.creditos - cliente.creditosUsados;
-  document.getElementById('clientTotal').textContent = cliente.creditos;
+  document.getElementById('clientName').textContent = c.nome;
+  document.getElementById('usados').textContent = c.usado;
+  document.getElementById('restantes').textContent = c.creditos - c.usado;
+  document.getElementById('total').textContent = c.creditos;
   
-  document.getElementById('linkGDrive').href = cliente.gdrive || '#';
-  document.getElementById('linkMonday').href = cliente.monday || '#';
-  document.getElementByI
+  document.getElementById('linkDrive').href = c.drive || '#';
+  document.getElementById('linkMonday').href = c.monday || '#';
+  document.getElementById('linkTrello').href = c.trello || '#';
+  
+  if (!c.monday) document.getElementById('linkMonday').style.opacity = '0.5';
+  if (!c.trello) document.getElementById('linkTrello').style.opacity = '0.5';
+}
+
+function sendWhatsApp(e) {
+  e.preventDefault();
+  const msg = `Oi Gabriela! Me chamo ${document.getElementById('nome').value}, sou de ${document.getElementById('empresa').value}.\n\n${document.getElementById('msg').value}`;
+  window.open(`https://wa.me/5555996003628?text=${encodeURIComponent(msg)}`, '_blank');
+  document.querySelector('form').reset();
+}
+
+document.getElementById('pass').addEventListener('keypress', e => {
+  if (e.key === 'Enter') login();
+});
+</script>
+
+</body>
+</html>
